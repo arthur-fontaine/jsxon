@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`jsxon runtime > should return a json object describing the element 1`] = `
+{
+  "props": {
+    "text": "Hello, JSXon!",
+  },
+  "type": "jsxon:Text",
+}
+`;

@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`basic babel transform > should transform jsx 1`] = `
+"import JSXon, { Text } from '../src/index.ts';
+export const element = JSXon.createElement(Text, {
+  text: "Hello, JSXon!"
+});"
+`;
