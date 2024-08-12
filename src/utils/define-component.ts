@@ -1,4 +1,5 @@
 import type { JSXonNode } from "../types/jsxon-node";
+import type { Prettify } from "../types/prettify";
 
 export const defineComponent = <
 	SIGNATURE extends string,
@@ -20,8 +21,27 @@ export const defineComponent = <
 		: SIGNATURE,
 	component: COMPONENT,
 ) => {
-	const c = (props: PROPS, ...children: JSXonNode<CHILDREN_TYPE>[]) => {
-		return component(props ?? ({} as PROPS), ...children) as ReturnType<COMPONENT>;
+	// NOTE: We need to duplicate the type definition here to type the returned function
+	type CHILDREN_TYPE_ = Parameters<COMPONENT>[1] extends JSXonNode<infer TYPE>
+		? TYPE
+		: never;
+
+	const c = (
+		props: Prettify<
+			PROPS &
+				(CHILDREN_TYPE_ extends never
+					? Record<never, never>
+					: { children?: JSXonNode<CHILDREN_TYPE_>[] })
+		>,
+	) => {
+		const { children, ...p } = props as PROPS & {
+			children?: JSXonNode<CHILDREN_TYPE_>[];
+		};
+		return component(
+			p as PROPS,
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			...(children ?? []) as any,
+		) as ReturnType<COMPONENT>;
 	};
 	c.__component = `jsxon:${name}` as const;
 	return c;

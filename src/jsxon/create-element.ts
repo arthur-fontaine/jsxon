@@ -3,7 +3,8 @@ import type { JSXonNode } from "../types/jsxon-node";
 
 export const createElement = <TYPE extends AnyJSXonComponent>(
 	type: TYPE,
-	...typeParams: Parameters<TYPE>
+	props: Parameters<TYPE>[0],
+	...children: Parameters<TYPE>[1][]
 ): JSXonNode<AnyJSXonComponent["__component"]> =>
 	// @ts-expect-error
-	type(...typeParams);
+	type({ ...props, children }, ...children);
