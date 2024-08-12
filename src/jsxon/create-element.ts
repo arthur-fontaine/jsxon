@@ -1,5 +1,5 @@
-import { AnyJSXonComponent } from "../types/any-jsxon-component";
-import { JSXonNode } from "../types/jsxon-node";
+import type { AnyJSXonComponent } from "../types/any-jsxon-component";
+import type { JSXonNode } from "../types/jsxon-node";
 
 export const createElement = <TYPE extends AnyJSXonComponent>(
 	type: TYPE,

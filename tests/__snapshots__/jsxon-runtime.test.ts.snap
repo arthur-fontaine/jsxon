@@ -1,6 +1,27 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`jsxon runtime > should return a json object describing the element 1`] = `
+exports[`jsxon runtime > should return a json object describing a nested element 1`] = `
+{
+  "children": [
+    {
+      "props": {
+        "text": "Hello, JSXon!",
+      },
+      "type": "jsxon:Text",
+    },
+    {
+      "props": {
+        "text": "Hello, JSXon!",
+      },
+      "type": "jsxon:Text",
+    },
+  ],
+  "props": {},
+  "type": "jsxon:HStack",
+}
+`;
+
+exports[`jsxon runtime > should return a json object describing a single element 1`] = `
 {
   "props": {
     "text": "Hello, JSXon!",
